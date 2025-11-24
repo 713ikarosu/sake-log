@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ちどりマップ (Chidori Map)
 
-## Getting Started
+**酔い歩きを、地図に残そう。**
 
-First, run the development server:
+ちどりマップは、飲んだお酒と場所を記録し、地図上で振り返ることができるログアプリです。
+「千鳥足」で歩いた記憶を、美しい地図とアイコンで可視化します。
 
+## 特徴
+
+- **🍶 お酒ログ**: 飲んだお酒の種類、写真、評価、コメントを記録。
+- **📍 マップビュー**: 記録したログを地図上にピン留め。お酒の種類ごとに異なるアイコンで表示されます。
+- **🗺️ 場所選択**: 現在地取得はもちろん、地図から直接場所を指定して記録可能。
+- **👤 プロフィール**: 自分の記録履歴や統計を確認（実装中）。
+- **🔒 公開設定**: 「自分のみ」の非公開記録も可能。
+
+## 技術スタック
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/)
+- **Database / Auth**: [Supabase](https://supabase.com/)
+- **Map**: [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview) (@react-google-maps/api)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Font**: Zen Maru Gothic (Google Fonts)
+
+## セットアップ
+
+### 1. リポジトリのクローン
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/sake-log.git
+cd sake-log
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. 依存関係のインストール
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. 環境変数の設定
+`.env.local` ファイルを作成し、以下の変数を設定してください。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-## Learn More
+# Google Maps API Configuration
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. 開発サーバーの起動
+```bash
+npm run dev
+```
+http://localhost:3000 にアクセスして確認してください。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## データベース (Supabase)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+以下のテーブル構成を使用しています。
 
-## Deploy on Vercel
+- `profiles`: ユーザー情報 (username, avatar_url)
+- `logs`: 飲酒ログ (drink_type, location, rating, image_url, lat/lng, etc.)
+- `follows`: フォロー関係 (将来的な機能)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ライセンス
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
